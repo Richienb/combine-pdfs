@@ -1,13 +1,16 @@
 const test = require("ava")
-const theModule = require(".")
+const parsePdf = require("pdf-parse")
+const { promises: fs } = require("fs")
+const combinePdfs = require(".")
 
-test("main", t => {
-	t.throws(() => {
-		theModule(123)
-	}, {
-		instanceOf: TypeError,
-		message: "Expected a string, got number"
-	})
+test("main", async t => {
+	const fixture = await fs.readFile("fixture.pdf")
 
-	t.is(theModule("unicorns"), "unicorns & rainbows")
+	const { text } = await parsePdf(await combinePdfs([fixture, fixture]))
+
+	t.is(text, `
+
+Dummy PDF file
+
+Dummy PDF file`)
 })

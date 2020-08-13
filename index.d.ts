@@ -1,15 +1,17 @@
 /**
-My awesome module.
-@param input Lorem ipsum.
-@param postfix Lorem ipsum.
+Combine multiple PDFs into one.
+@param pdfs The PDFs to combine.
 @example
 ```
-const theModule = require("the-module");
+const { promises: fs } = require("fs");
+const combinePdfs = require("combine-pdfs");
 
-theModule("unicorns");
-//=> 'unicorns & rainbows'
+await fs.writeFile("output.pdf", await combinePdfs([
+	await fs.readFile("file.pdf"),
+	await fs.readFile("file2.pdf")
+]));
 ```
 */
-declare function theModule(input: string, { postfix }: { postfix?: string }): string
+declare function combinePdfs(pdfs: ReadonlyArray<string | Uint8Array | ArrayBuffer | Buffer>): Promise<Uint8Array>
 
-export = theModule
+export = combinePdfs

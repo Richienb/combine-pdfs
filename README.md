@@ -1,41 +1,33 @@
-# the-module [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/the-module/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/the-module)
+# combine-pdfs [![Travis CI Build Status](https://img.shields.io/travis/com/Richienb/combine-pdfs/master.svg?style=for-the-badge)](https://travis-ci.com/Richienb/combine-pdfs)
 
-My awesome module.
+Combine multiple PDFs into one.
 
-[![NPM Badge](https://nodei.co/npm/the-module.png)](https://npmjs.com/package/the-module)
+[![NPM Badge](https://nodei.co/npm/combine-pdfs.png)](https://npmjs.com/package/combine-pdfs)
 
 ## Install
 
 ```sh
-npm install the-module
+npm install combine-pdfs
 ```
 
 ## Usage
 
 ```js
-const theModule = require("the-module");
+const { promises: fs } = require("fs");
+const combinePdfs = require("combine-pdfs");
 
-theModule("unicorns");
-//=> 'unicorns & rainbows'
+await fs.writeFile("output.pdf", await combinePdfs([
+	await fs.readFile("file.pdf"),
+	await fs.readFile("file2.pdf")
+]));
 ```
 
 ## API
 
-### theModule(input, options?)
+### combinePdfs(pdfs)
 
-#### input
+#### pdfs
 
-Type: `string`
+Type: `Array<string | Uint8Array | ArrayBuffer | Buffer>`
 
-Lorem ipsum.
-
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`\
-Default: `rainbows`
-
-Lorem ipsum.
+The PDFs to combine.
