@@ -1,6 +1,6 @@
 {
 	"name": "combine-pdfs",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "Combine multiple PDFs into one.",
 	"repository": "https://github.com/Richienb/combine-pdfs.git",
 	"author": "Richie Bendall <richiebendall@gmail.com>",
